@@ -13,13 +13,20 @@ class ProductoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-        $productos=Producto::orderBy('id','DESC')->paginate(8);
-        return view('producto.index',compact('productos'));
+    public function index(Request $request)
+{
+    $categorias = Categoria::orderBy('nombre')->get();
 
+    $query = Producto::orderBy('id', 'DESC');
+
+    if ($request->filled('categoria')) {
+        $query->where('categoria_id', $request->categoria);
     }
+
+    $productos = $query->paginate(8)->withQueryString();
+
+    return view('producto.index', compact('productos', 'categorias'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -81,26 +88,24 @@ class ProductoController extends Controller
      * Update the specified resource in storage.
      */
     public function update(ProductoRequest $request, Producto $producto)
-    {
-        //
-        if($request->hasFile('imagen')){
-            if($producto->imagen&& file_exists(public_path('img/'.$producto->imagen))){
-            //eliminar la imagen antigua
-            unlink(public_path('img/'.$producto->imagen))    
-            }
-            if($request->hasFile('imagen')){
-                $imagen=$request->file('imagen');
-                $nombreImagen=time().'.'.$imagen->getClientOriginalExtension();
-                $imagen->move(public_path('img'),$nombreImagen);
-        }else{
-            $nombreImagen=$producto->imagen;
+{
+    if($request->hasFile('imagen')){
+        if($producto->imagen && file_exists(public_path('img/'.$producto->imagen))){
+            unlink(public_path('img/'.$producto->imagen));
         }
-        $data=$request->except('imagen');
-        $data['imagen']=$nombreImagen;
-
-        $producto-update($data);
-        return redirect()->route('producto.index')->with("success","Producto actualizado correctamente");
+        $imagen = $request->file('imagen');
+        $nombreImagen = time().'.'.$imagen->getClientOriginalExtension();
+        $imagen->move(public_path('img'), $nombreImagen);
+    } else {
+        $nombreImagen = $producto->imagen;
     }
+
+    $data = $request->except('imagen');
+    $data['imagen'] = $nombreImagen;
+    $producto->update($data);
+
+    return redirect()->route('producto.index')->with('success', 'Producto actualizado correctamente');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -110,12 +115,12 @@ class ProductoController extends Controller
         //
         try{
             $producto->delete();
-            return redirect()->route("producto.index")->with('success', 'Producto eliminado correctamente')
+            return redirect()->route("producto.index")->with('success', 'Producto eliminado correctamente');
                }catch(QueryException $e){
                 if($e->getCode()==="23000"){
-                    return redirect()->back()->with('error', 'El producto no se puede eliminar por que esta asociado con otro registro')
+                    return redirect()->back()->with('error', 'El producto no se puede eliminar por que esta asociado con otro registro');
                 }
-                return redirect()->back()->with('error inesperado')
+                return redirect()->back()->with('error inesperado');
                }
      }
 }

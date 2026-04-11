@@ -6,6 +6,18 @@ Productos
 
 @section('contenido')
     
+<form method="GET" action="{{ route('producto.index') }}">
+    <select name="categoria" onchange="this.form.submit()">
+        <option value="">Todas las categorías</option>
+        @foreach ($categorias as $cat)
+            <option value="{{ $cat->id }}"
+                {{ request('categoria') == $cat->id ? 'selected' : '' }}>
+                {{ $cat->nombre }}
+            </option>
+        @endforeach
+    </select>
+</form>
+
 <section class="container-tabla">
    <h2 class="titulo-tabla"> Listado de productos</h2>
    
