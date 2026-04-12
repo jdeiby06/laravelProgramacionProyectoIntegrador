@@ -97,6 +97,9 @@ Productos
        </tbody>
    </table>
     
+   <div class="nav-botones">
+        <?php echo e($productos->links('vendor.pagination.default')); ?>
+
     </div>
 </section>
 <?php $__env->stopSection(); ?>
