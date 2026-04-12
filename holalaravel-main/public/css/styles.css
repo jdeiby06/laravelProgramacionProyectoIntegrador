@@ -362,25 +362,29 @@ body{
 }
 
 /* Select y input con estilo consistente */
-.filtro-select,
-.filtro-input {
-    padding: 7px 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    min-width: 150px;
+.filtro-select {
+    padding: 8px 15px;
+    border: 2px solid var(--color-texto-hover) !important; 
+    border-radius: 20px !important;                        
+    min-width: 180px;
     font-size: 14px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s ease;
-    flex-shrink: 0;
-}
-
-.filtro-input {
-    min-width: 200px;
+    font-family: "Roboto", sans-serif;
+    background-color: white !important;
+    color: var(--color-texto);
+    box-shadow: 0px 2px 8px rgba(129, 67, 191, 0.2) !important;
+    cursor: pointer;
+    appearance: none !important;                         
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238143bf' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 35px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .filtro-select:focus,
-.filtro-input:focus {
-    border-color: #17a2b8;
+.filtro-select:hover {
+    border-color: var(--color-texto-hover);
+    box-shadow: 0px 4px 12px rgba(129, 67, 191, 0.35);
     outline: none;
 }
 

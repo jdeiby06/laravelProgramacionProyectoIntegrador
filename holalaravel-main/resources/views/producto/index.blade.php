@@ -6,8 +6,8 @@ Productos
 
 @section('contenido')
     
-<form method="GET" action="{{ route('producto.index') }}">
-    <select name="categoria" onchange="this.form.submit()">
+<form method="GET" action="{{ route('producto.index') }}" class="form-filtros">
+    <select name="categoria" class="filtro-select" onchange="this.form.submit()">
         <option value="">Todas las categorías</option>
         @foreach ($categorias as $cat)
             <option value="{{ $cat->id }}"

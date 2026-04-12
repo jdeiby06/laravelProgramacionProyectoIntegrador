@@ -6,8 +6,8 @@ Productos
 
 <?php $__env->startSection('contenido'); ?>
     
-<form method="GET" action="<?php echo e(route('producto.index')); ?>">
-    <select name="categoria" onchange="this.form.submit()">
+<form method="GET" action="<?php echo e(route('producto.index')); ?>" class="form-filtros">
+    <select name="categoria" class="filtro-select" onchange="this.form.submit()">
         <option value="">Todas las categorías</option>
         <?php $__currentLoopData = $categorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <option value="<?php echo e($cat->id); ?>"
