@@ -20,7 +20,7 @@ class ProductoController extends Controller
     $query = Producto::orderBy('id', 'DESC');
 
     if ($request->filled('categoria')) {
-        $query->where('categoria_id', $request->categoria);
+       $query->where('id_categoria', $request->categoria);
     }
 
     $productos = $query->paginate(8)->withQueryString();
