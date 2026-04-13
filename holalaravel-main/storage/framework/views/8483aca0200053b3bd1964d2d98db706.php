@@ -90,4 +90,4 @@
    
     <script src="<?php echo e(asset('js/script.js')); ?>"></script>
 </body>
-</html><?php /**PATH C:\Users\USUARIO\Downloads\laravelProgramacion3\holalaravel-main\resources\views/layouts/plantilla.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\Users\granj\Documents\proyecto_nuevo\laravelProgramacionProyectoIntegrador\holalaravel-main\resources\views/layouts/plantilla.blade.php ENDPATH**/ ?>

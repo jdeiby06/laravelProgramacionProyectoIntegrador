@@ -72,4 +72,4 @@
 </div>
 </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make("layouts.plantilla", array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\USUARIO\Downloads\laravelProgramacion3\holalaravel-main\resources\views/producto/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make("layouts.plantilla", array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\granj\Documents\proyecto_nuevo\laravelProgramacionProyectoIntegrador\holalaravel-main\resources\views/producto/create.blade.php ENDPATH**/ ?>

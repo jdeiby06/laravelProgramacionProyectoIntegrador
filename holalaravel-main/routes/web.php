@@ -5,7 +5,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PdfController;
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/producto');
 });
 
 Route::get('/hola', function () {
