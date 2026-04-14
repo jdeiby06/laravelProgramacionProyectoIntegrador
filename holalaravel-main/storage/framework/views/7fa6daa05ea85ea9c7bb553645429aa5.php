@@ -97,6 +97,9 @@ Productos
        </tbody>
    </table>
     
+   <div class="nav-botones">
+        <?php echo e($productos->links()); ?>
+
     </div>
 </section>
 <?php $__env->stopSection(); ?>

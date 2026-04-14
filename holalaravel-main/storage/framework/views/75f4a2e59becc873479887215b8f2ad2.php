@@ -23,14 +23,14 @@
    <aside class="slidebar" id="slidebar">
    
     <a href="" class="logo">
-        <img src="<?php echo e(asset('img/cangrejo.png')); ?>" alt="Logo" class="logo-img">
-        <p class="logo-text">Tienda</p>
+        <img src="<?php echo e(asset('img/InventoryLogo.jpg')); ?>" alt="Logo" class="logo-img">
+        <p class="logo-text">InventorySoft</p>
       </a>
     
     <!-- PERFIL -->
     <div class="element-slidebar">
         <div class="element-slidebar-btn profile">
-         <span><img src="<?php echo e(asset('img/face3.png')); ?>" alt="avatar"></span>
+         <span><img src="<?php echo e(asset('img/InventoryLogo.jpg')); ?>" alt="avatar"></span>
          <p>user</p>
         </div>
         <div class="element-slidebar-content">
@@ -65,7 +65,7 @@
          
         <div class="element-slidebar-btn">
          <span><img  src="<?php echo e(asset('img/rokrt.png')); ?>" alt="Product"></span>
-         <a href="">Prodcutos</a>
+         <a href="">Productos</a>
         </div>
        
   

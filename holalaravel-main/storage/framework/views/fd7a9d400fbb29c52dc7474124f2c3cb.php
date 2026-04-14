@@ -1,0 +1,1 @@
+<?php /**PATH C:\Users\USUARIO\Downloads\laravelProgramacion3\holalaravel-main\resources\views/producto/show.blade.php ENDPATH**/ ?>

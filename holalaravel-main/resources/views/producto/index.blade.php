@@ -96,7 +96,7 @@ Productos
    </table>
     {{-- resultados de paginacion --}}
    <div class="nav-botones">
-        {{ $productos->links('vendor.pagination.default') }}
+        {{ $productos->links() }}
     </div>
 </section>
 @endsection
