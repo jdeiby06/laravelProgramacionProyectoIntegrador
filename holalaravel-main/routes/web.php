@@ -19,10 +19,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //ruta categorias
     Route::resource('/categoria', CategoriaController::class) ->parameters(['categoria' => 'categoria']);
+    
+    //pdf
+    Route::get('producto/pdf', [ProductoController::class, 'pdf'])->name('producto.pdf');
+    Route::get('/pdfProductos', [PdfControlleer::class, 'pdfProductos'])->name('pdfProductos');
     //ruta productos
     Route::resource('/producto', ProductoController::class);
-    //pdf
-    Route::get('/pdfProductos', [PdfControlleer::class, 'pdfProductos'])->name('pdfProductos');
 });
 
 require __DIR__.'/auth.php';

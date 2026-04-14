@@ -258,7 +258,7 @@ body{
     margin-left: 10px;
     margin-bottom: 40px;
     border: solid 1px var(--color-texto-hover);
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: rgba(186, 100, 186, 0.09);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
@@ -267,6 +267,7 @@ body{
     width: 80px; /* Ajusta el tamaño del logo */
     height: 80px;
     margin-bottom: 10px;
+    border-radius: 50px;;
   }
   
   .logo-text {
@@ -453,4 +454,37 @@ body{
     .slidebar.hidden{
         transform:translateX(0) ;
     }
+}
+
+/* Barra que contiene filtros y botones */
+.barra-acciones {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.nav-acciones {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Botón limpiar en gris */
+.btn-limpiar {
+    background-color: #6c757d;
+}
+.btn-limpiar:hover {
+    background-color: #5a6268;
+}
+
+/* Botón PDF */
+.btn-pdf {
+    background-color: #dc3545;
+}
+.btn-pdf:hover {
+    background-color: #c82333;
 }
