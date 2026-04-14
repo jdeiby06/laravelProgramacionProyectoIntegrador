@@ -476,6 +476,7 @@ body{
 /* Botón limpiar en gris */
 .btn-limpiar {
     background-color: #6c757d;
+    height: 39px;
 }
 .btn-limpiar:hover {
     background-color: #5a6268;
