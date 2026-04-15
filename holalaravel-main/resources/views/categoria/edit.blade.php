@@ -8,7 +8,7 @@
 
 <div class= "container-formulario">
     <div class="card formulario">
-        <h2>Crear Nueva Categoría</h2>
+        <h2>Editar Categoría</h2>
         <form action="{{route('categoria.update',$categoria->id)}}" method="POST">
             {{-- agregar directica para qu se genere un token --}}
             @csrf

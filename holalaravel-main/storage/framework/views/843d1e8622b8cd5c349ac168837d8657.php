@@ -1,216 +1,237 @@
-<?php if (isset($component)) { $__componentOriginal69dc84650370d1d4dc1b42d016d7226b = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal69dc84650370d1d4dc1b42d016d7226b = $attributes; } ?>
-<?php $component = App\View\Components\GuestLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('guest-layout'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\GuestLayout::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
-    <!-- Session Status -->
-    <?php if (isset($component)) { $__componentOriginal7c1bf3a9346f208f66ee83b06b607fb5 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal7c1bf3a9346f208f66ee83b06b607fb5 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.auth-session-status','data' => ['class' => 'mb-4','status' => session('status')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('auth-session-status'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['class' => 'mb-4','status' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(session('status'))]); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal7c1bf3a9346f208f66ee83b06b607fb5)): ?>
-<?php $attributes = $__attributesOriginal7c1bf3a9346f208f66ee83b06b607fb5; ?>
-<?php unset($__attributesOriginal7c1bf3a9346f208f66ee83b06b607fb5); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal7c1bf3a9346f208f66ee83b06b607fb5)): ?>
-<?php $component = $__componentOriginal7c1bf3a9346f208f66ee83b06b607fb5; ?>
-<?php unset($__componentOriginal7c1bf3a9346f208f66ee83b06b607fb5); ?>
-<?php endif; ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-texto-hover: rgba(129, 67, 191, 0.8);
+            --color-main: rgb(244, 247, 250);
+            --color-texto: rgba(25, 22, 22, 0.836);
+        }
 
-    <form method="POST" action="<?php echo e(route('login')); ?>">
-        <?php echo csrf_field(); ?>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        <!-- Email Address -->
-        <div>
-            <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'email','value' => __('Email')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('input-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['for' => 'email','value' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(__('Email'))]); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $attributes = $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
-            <?php if (isset($component)) { $__componentOriginal18c21970322f9e5c938bc954620c12bb = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal18c21970322f9e5c938bc954620c12bb = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['id' => 'email','class' => 'block mt-1 w-full','type' => 'email','name' => 'email','value' => old('email'),'required' => true,'autofocus' => true,'autocomplete' => 'username']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('text-input'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['id' => 'email','class' => 'block mt-1 w-full','type' => 'email','name' => 'email','value' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(old('email')),'required' => true,'autofocus' => true,'autocomplete' => 'username']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal18c21970322f9e5c938bc954620c12bb)): ?>
-<?php $attributes = $__attributesOriginal18c21970322f9e5c938bc954620c12bb; ?>
-<?php unset($__attributesOriginal18c21970322f9e5c938bc954620c12bb); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal18c21970322f9e5c938bc954620c12bb)): ?>
-<?php $component = $__componentOriginal18c21970322f9e5c938bc954620c12bb; ?>
-<?php unset($__componentOriginal18c21970322f9e5c938bc954620c12bb); ?>
-<?php endif; ?>
-            <?php if (isset($component)) { $__componentOriginalf94ed9c5393ef72725d159fe01139746 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginalf94ed9c5393ef72725d159fe01139746 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('email'),'class' => 'mt-2']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('input-error'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('email')),'class' => 'mt-2']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginalf94ed9c5393ef72725d159fe01139746)): ?>
-<?php $attributes = $__attributesOriginalf94ed9c5393ef72725d159fe01139746; ?>
-<?php unset($__attributesOriginalf94ed9c5393ef72725d159fe01139746); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalf94ed9c5393ef72725d159fe01139746)): ?>
-<?php $component = $__componentOriginalf94ed9c5393ef72725d159fe01139746; ?>
-<?php unset($__componentOriginalf94ed9c5393ef72725d159fe01139746); ?>
-<?php endif; ?>
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: var(--color-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--color-texto);
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(129, 67, 191, 0.15);
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            border-top: 4px solid var(--color-texto-hover);
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo img {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 10px;
+        }
+
+        .login-logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-texto-hover);
+        }
+
+        .login-logo p {
+            font-size: 13px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--color-texto);
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: "Roboto", sans-serif;
+            color: var(--color-texto);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--color-texto-hover);
+            box-shadow: 0 0 0 3px rgba(129, 67, 191, 0.1);
+        }
+
+        .form-error {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .remember-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .remember-row input[type="checkbox"] {
+            accent-color: var(--color-texto-hover);
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 11px;
+            background-color: var(--color-texto-hover);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: "Roboto", sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: rgba(109, 47, 171, 0.9);
+            box-shadow: 0 4px 12px rgba(129, 67, 191, 0.3);
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-link:hover {
+            color: var(--color-texto-hover);
+        }
+
+        .session-status {
+            background-color: rgba(129, 67, 191, 0.1);
+            border: 1px solid var(--color-texto-hover);
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 13px;
+            color: var(--color-texto-hover);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+
+        
+        <div class="login-logo">
+            <img src="<?php echo e(asset('img/InventoryLogo.png')); ?>" alt="Logo"
+                onerror="this.style.display='none'">
+            <h1>Bienvenido</h1>
+            <p>Inicia sesión para continuar</p>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'password','value' => __('Password')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('input-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['for' => 'password','value' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(__('Password'))]); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $attributes = $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
+        
+        <?php if(session('status')): ?>
+            <div class="session-status"><?php echo e(session('status')); ?></div>
+        <?php endif; ?>
 
-            <?php if (isset($component)) { $__componentOriginal18c21970322f9e5c938bc954620c12bb = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal18c21970322f9e5c938bc954620c12bb = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['id' => 'password','class' => 'block mt-1 w-full','type' => 'password','name' => 'password','required' => true,'autocomplete' => 'current-password']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('text-input'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['id' => 'password','class' => 'block mt-1 w-full','type' => 'password','name' => 'password','required' => true,'autocomplete' => 'current-password']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal18c21970322f9e5c938bc954620c12bb)): ?>
-<?php $attributes = $__attributesOriginal18c21970322f9e5c938bc954620c12bb; ?>
-<?php unset($__attributesOriginal18c21970322f9e5c938bc954620c12bb); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal18c21970322f9e5c938bc954620c12bb)): ?>
-<?php $component = $__componentOriginal18c21970322f9e5c938bc954620c12bb; ?>
-<?php unset($__componentOriginal18c21970322f9e5c938bc954620c12bb); ?>
-<?php endif; ?>
+        <form method="POST" action="<?php echo e(route('login')); ?>">
+            <?php echo csrf_field(); ?>
 
-            <?php if (isset($component)) { $__componentOriginalf94ed9c5393ef72725d159fe01139746 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginalf94ed9c5393ef72725d159fe01139746 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('password'),'class' => 'mt-2']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('input-error'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('password')),'class' => 'mt-2']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginalf94ed9c5393ef72725d159fe01139746)): ?>
-<?php $attributes = $__attributesOriginalf94ed9c5393ef72725d159fe01139746; ?>
-<?php unset($__attributesOriginalf94ed9c5393ef72725d159fe01139746); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalf94ed9c5393ef72725d159fe01139746)): ?>
-<?php $component = $__componentOriginalf94ed9c5393ef72725d159fe01139746; ?>
-<?php unset($__componentOriginalf94ed9c5393ef72725d159fe01139746); ?>
-<?php endif; ?>
-        </div>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email"
+                    value="<?php echo e(old('email')); ?>"
+                    required autofocus autocomplete="username">
+                <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                    <p class="form-error"><?php echo e($message); ?></p>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400"><?php echo e(__('Remember me')); ?></span>
-            </label>
-        </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password"
+                    required autocomplete="current-password">
+                <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                    <p class="form-error"><?php echo e($message); ?></p>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
 
-        <div class="flex items-center justify-end mt-4">
+            
+            <div class="remember-row">
+                <input type="checkbox" id="remember_me" name="remember">
+                <label for="remember_me">Recordarme</label>
+            </div>
+
+            
+            <button type="submit" class="btn-login">Iniciar Sesión</button>
+
+            
             <?php if(Route::has('password.request')): ?>
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="<?php echo e(route('password.request')); ?>">
-                    <?php echo e(__('Forgot your password?')); ?>
-
+                <a href="<?php echo e(route('password.request')); ?>" class="forgot-link">
+                    ¿Olvidaste tu contraseña?
                 </a>
             <?php endif; ?>
 
-            <?php if (isset($component)) { $__componentOriginald411d1792bd6cc877d687758b753742c = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginald411d1792bd6cc877d687758b753742c = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.primary-button','data' => ['class' => 'ms-3']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('primary-button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['class' => 'ms-3']); ?>
-                <?php echo e(__('Log in')); ?>
+        </form>
+    </div>
 
-             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginald411d1792bd6cc877d687758b753742c)): ?>
-<?php $attributes = $__attributesOriginald411d1792bd6cc877d687758b753742c; ?>
-<?php unset($__attributesOriginald411d1792bd6cc877d687758b753742c); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginald411d1792bd6cc877d687758b753742c)): ?>
-<?php $component = $__componentOriginald411d1792bd6cc877d687758b753742c; ?>
-<?php unset($__componentOriginald411d1792bd6cc877d687758b753742c); ?>
-<?php endif; ?>
-        </div>
-    </form>
- <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal69dc84650370d1d4dc1b42d016d7226b)): ?>
-<?php $attributes = $__attributesOriginal69dc84650370d1d4dc1b42d016d7226b; ?>
-<?php unset($__attributesOriginal69dc84650370d1d4dc1b42d016d7226b); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal69dc84650370d1d4dc1b42d016d7226b)): ?>
-<?php $component = $__componentOriginal69dc84650370d1d4dc1b42d016d7226b; ?>
-<?php unset($__componentOriginal69dc84650370d1d4dc1b42d016d7226b); ?>
-<?php endif; ?>
-<?php /**PATH C:\Users\USUARIO\Downloads\laravelProgramacion3\holalaravel-main\resources\views/auth/login.blade.php ENDPATH**/ ?>
+</body>
+</html><?php /**PATH C:\Users\USUARIO\Downloads\laravelProgramacion3\holalaravel-main\resources\views/auth/login.blade.php ENDPATH**/ ?>

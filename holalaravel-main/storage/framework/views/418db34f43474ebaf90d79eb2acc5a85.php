@@ -8,7 +8,7 @@
 
 <div class= "container-formulario">
     <div class="card formulario">
-        <h2>Crear Nueva Categoría</h2>
+        <h2>Editar Categoría</h2>
         <form action="<?php echo e(route('categoria.update',$categoria->id)); ?>" method="POST">
             
             <?php echo csrf_field(); ?>

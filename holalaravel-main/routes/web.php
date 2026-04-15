@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     
     //pdf
     Route::get('producto/pdf', [ProductoController::class, 'pdf'])->name('producto.pdf');
-    Route::get('/pdfProductos', [PdfControlleer::class, 'pdfProductos'])->name('pdfProductos');
+    Route::get('/pdfProductos', [PdfController::class, 'pdfProductos'])->name('pdfProductos');
     //ruta productos
     Route::resource('/producto', ProductoController::class);
 });

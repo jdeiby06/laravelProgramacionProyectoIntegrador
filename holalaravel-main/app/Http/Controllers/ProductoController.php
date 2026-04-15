@@ -130,7 +130,7 @@ class ProductoController extends Controller
         $categorias=Categoria::orderBy('id','DESC')
        ->select('categorias.id','categorias.nombre')
        ->get();
-       return view('producto.create',compact('categorias','producto'));
+       return view('producto.edit', compact('categorias', 'producto'));
     }
 
     /**
