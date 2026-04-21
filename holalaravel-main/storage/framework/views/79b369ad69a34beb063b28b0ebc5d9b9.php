@@ -11,9 +11,6 @@
      <?php $__env->slot('header', null, []); ?> 
         <h2 style="color: rgba(129, 67, 191, 0.8); font-size: 20px; font-weight: 700;">
             Dashboard
-            <a href="/">
-    <img src="<?php echo e(asset('img/InventoryLogo.jpg')); ?>" alt="Logo" style="width: 80px; height: 80px;">
-</a>
         </h2>
      <?php $__env->endSlot(); ?>
 

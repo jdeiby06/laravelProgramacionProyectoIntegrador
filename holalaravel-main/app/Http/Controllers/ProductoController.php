@@ -72,7 +72,7 @@ class ProductoController extends Controller
         }
     }
 
-    $productos = $query->paginate(8)->withQueryString();
+    $productos = $query->paginate(2)->withQueryString();
 
     return view('producto.index', compact('productos', 'categorias'));
 }
