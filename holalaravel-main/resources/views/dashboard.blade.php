@@ -1,109 +1,86 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 style="color: rgba(129, 67, 191, 0.8); font-size: 20px; font-weight: 700;">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Dashboard
         </h2>
     </x-slot>
 
-    <div style="padding: 30px 20px;">
-        <div style="max-width: 1200px; margin: auto;">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
-            {{-- Tarjetas de resumen --}}
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px;">
-
-                {{-- Productos --}}
-                <div style="background: white; border-radius: 12px; padding: 20px;
-                    box-shadow: 0 4px 12px rgba(129, 67, 191, 0.1);
-                    border-left: 4px solid rgba(129, 67, 191, 0.8);">
-                    <p style="font-size: 13px; color: #999; margin-bottom: 6px;">Total Productos</p>
-                    <h3 style="font-size: 28px; font-weight: 700; color: rgba(129, 67, 191, 0.8);">
-                        {{ \App\Models\Producto::count() }}
-                    </h3>
-                    <a href="{{ route('producto.index') }}"
-                        style="font-size: 12px; color: rgba(129, 67, 191, 0.8); text-decoration: none; margin-top: 8px; display: inline-block;">
-                        Ver productos →
-                    </a>
+            {{-- Tarjetas resumen --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white rounded-lg shadow p-5 border-l-4 border-purple-500">
+                    <p class="text-sm text-gray-500">Total Productos</p>
+                    <p class="text-3xl font-bold text-purple-600">{{ $totalProductos }}</p>
+                    <a href="{{ route('producto.index') }}" class="text-sm text-purple-400">Ver productos →</a>
                 </div>
-
-                {{-- Categorías --}}
-                <div style="background: white; border-radius: 12px; padding: 20px;
-                    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.15);
-                    border-left: 4px solid #17a2b8;">
-                    <p style="font-size: 13px; color: #999; margin-bottom: 6px;">Total Categorías</p>
-                    <h3 style="font-size: 28px; font-weight: 700; color: #17a2b8;">
-                        {{ \App\Models\Categoria::count() }}
-                    </h3>
-                    <a href="{{ route('categoria.index') }}"
-                        style="font-size: 12px; color: #17a2b8; text-decoration: none; margin-top: 8px; display: inline-block;">
-                        Ver categorías →
-                    </a>
+                <div class="bg-white rounded-lg shadow p-5 border-l-4 border-teal-500">
+                    <p class="text-sm text-gray-500">Total Categorías</p>
+                    <p class="text-3xl font-bold text-teal-600">{{ $totalCategorias }}</p>
                 </div>
-
-                {{-- Stock agotado --}}
-                <div style="background: white; border-radius: 12px; padding: 20px;
-                    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.1);
-                    border-left: 4px solid #dc3545;">
-                    <p style="font-size: 13px; color: #999; margin-bottom: 6px;">Sin Stock</p>
-                    <h3 style="font-size: 28px; font-weight: 700; color: #dc3545;">
-                        {{ \App\Models\Producto::where('stock', '<=', 0)->count() }}
-                    </h3>
-                    <a href="{{ route('producto.index', ['stock' => 'agotado']) }}"
-                        style="font-size: 12px; color: #dc3545; text-decoration: none; margin-top: 8px; display: inline-block;">
-                        Ver agotados →
-                    </a>
+                <div class="bg-white rounded-lg shadow p-5 border-l-4 border-red-500">
+                    <p class="text-sm text-gray-500">Sin Stock</p>
+                    <p class="text-3xl font-bold text-red-600">{{ $sinStock }}</p>
                 </div>
-
-                {{-- Usuario --}}
-                <div style="background: white; border-radius: 12px; padding: 20px;
-                    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.1);
-                    border-left: 4px solid #28a745;">
-                    <p style="font-size: 13px; color: #999; margin-bottom: 6px;">Usuario</p>
-                    <h3 style="font-size: 16px; font-weight: 700; color: #28a745; margin-top: 6px;">
-                        {{ auth()->user()->name }}
-                    </h3>
-                    <p style="font-size: 12px; color: #999; margin-top: 4px;">
-                        {{ auth()->user()->email }}
-                    </p>
-                </div>
-
             </div>
 
-            {{-- Productos con poco stock --}}
-            <div style="background: white; border-radius: 12px; padding: 20px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
-                <h3 style="font-size: 16px; font-weight: 700; color: rgba(129, 67, 191, 0.8);
-                    margin-bottom: 15px; padding-bottom: 10px;
-                    border-bottom: 2px solid rgba(129, 67, 191, 0.15);">
-                    ⚠️ Productos con stock bajo (menos de 5)
-                </h3>
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-                    <thead>
-                        <tr style="background: rgba(129, 67, 191, 0.08);">
-                            <th style="padding: 10px; text-align: left; color: rgba(129, 67, 191, 0.8);">Nombre</th>
-                            <th style="padding: 10px; text-align: left; color: rgba(129, 67, 191, 0.8);">Categoría</th>
-                            <th style="padding: 10px; text-align: left; color: rgba(129, 67, 191, 0.8);">Stock</th>
+            {{-- Stock bajo --}}
+            @if($stockBajo->count())
+            <div class="bg-white rounded-lg shadow p-5">
+                <h3 class="font-semibold text-gray-700 mb-3">⚠️ Productos con stock bajo (menos de 5)</h3>
+                <table class="w-full text-sm">
+                    <thead class="bg-purple-50 text-gray-600">
+                        <tr>
+                            <th class="text-left p-2">Nombre</th>
+                            <th class="text-left p-2">Categoría</th>
+                            <th class="text-left p-2">Stock</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse (\App\Models\Producto::with('categoria')->where('stock', '<', 5)->orderBy('stock')->take(8)->get() as $producto)
-                        <tr style="border-bottom: 1px solid #f0f0f0;">
-                            <td style="padding: 10px;">{{ $producto->nombre }}</td>
-                            <td style="padding: 10px; color: #999;">
-                                {{ $producto->categoria ? $producto->categoria->nombre : 'Sin categoría' }}
+                        @foreach($stockBajo as $p)
+                        <tr class="border-t">
+                            <td class="p-2">{{ $p->nombre }}</td>
+                            <td class="p-2">{{ $p->categoria->nombre ?? 'Sin categoría' }}</td>
+                            <td class="p-2">
+                                <span class="bg-yellow-400 text-white text-xs px-2 py-1 rounded-full">{{ $p->stock }}</span>
                             </td>
-                            <td style="padding: 10px;">
-                                <span style="background: {{ $producto->stock <= 0 ? '#dc3545' : '#ffc107' }};
-                                    color: white; padding: 3px 10px; border-radius: 20px; font-size: 12px;">
-                                    {{ $producto->stock <= 0 ? 'Agotado' : $producto->stock }}
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endif
+
+            {{-- Historial de movimientos --}}
+            <div class="bg-white rounded-lg shadow p-5">
+                <h3 class="font-semibold text-gray-700 mb-3">📦 Últimas entradas/salidas de productos</h3>
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-600">
+                        <tr>
+                            <th class="text-left p-2">Fecha</th>
+                            <th class="text-left p-2">Producto</th>
+                            <th class="text-left p-2">Cantidad</th>
+                            <th class="text-left p-2">Usuario</th>
+                            <th class="text-left p-2">Estado venta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($movimientos as $mov)
+                        <tr class="border-t">
+                            <td class="p-2 text-gray-500">{{ $mov->created_at->format('d/m/Y H:i') }}</td>
+                            <td class="p-2">{{ $mov->producto->nombre ?? 'N/A' }}</td>
+                            <td class="p-2">{{ $mov->cantidad }}</td>
+                            <td class="p-2">{{ $mov->venta->cliente->name ?? 'N/A' }}</td>
+                            <td class="p-2">
+                                <span class="text-xs px-2 py-1 rounded-full
+                                    {{ $mov->venta->estado === 'completado' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                                    {{ ucfirst($mov->venta->estado ?? 'pendiente') }}
                                 </span>
                             </td>
                         </tr>
                         @empty
-                        <tr>
-                            <td colspan="3" style="padding: 20px; text-align: center; color: #28a745;">
-                                ✅ Todos los productos tienen stock suficiente
-                            </td>
-                        </tr>
+                        <tr><td colspan="5" class="p-4 text-center text-gray-400">Sin movimientos registrados</td></tr>
                         @endforelse
                     </tbody>
                 </table>
