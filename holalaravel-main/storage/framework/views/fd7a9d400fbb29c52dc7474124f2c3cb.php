@@ -13,11 +13,11 @@
 
         </p>
 
-        <?php if($producto->imagen): ?>
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($producto->imagen): ?>
             <div>
                 <img src="<?php echo e(asset('img/'.$producto->imagen)); ?>" width="200">
             </div>
-        <?php endif; ?>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
         <br>
         <a href="<?php echo e(route('producto.index')); ?>">Volver</a>

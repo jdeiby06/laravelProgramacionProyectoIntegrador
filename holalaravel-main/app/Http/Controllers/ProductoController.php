@@ -149,9 +149,25 @@ class ProductoController extends Controller
         $nombreImagen = $producto->imagen;
     }
 
+    // ← Guardar ANTES de actualizar
+    $stockAnterior = $producto->stock;
+
     $data = $request->except('imagen');
     $data['imagen'] = $nombreImagen;
     $producto->update($data);
+    
+
+    
+    // Registra el historial si el stock cambió
+if ((int)$stockAnterior !== (int)$producto->stock) {
+    \App\Models\HistorialStock::create([
+        'producto_id'       => $producto->id,
+        'usuario_id'        => auth()->id(),
+        'cantidad_anterior' => (int)$stockAnterior,
+        'cantidad_nueva'    => (int)$producto->stock,
+        'motivo'            => 'Actualización de producto desde panel de administración',
+    ]);
+}
 
     return redirect()->route('producto.index')->with('success', 'Producto actualizado correctamente');
 }
