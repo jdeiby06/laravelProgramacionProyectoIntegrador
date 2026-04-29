@@ -5,8 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\VentaController;
 
 Route::get( '/', [WelcomeController::class, 'welcome'])->name('welcome');
+
+Route::post('/ventas',[VentaController::class,'store'])->name('ventas.store');
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,7 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/pdfProductos', [PdfController::class, 'pdfProductos'])->name('pdfProductos');
     //ruta productos
     Route::resource('/producto', ProductoController::class);
-
+    //ruta ventas
+    Route::resource('/ventas', VentaController::class)->except(['store']);
     
 });
 
