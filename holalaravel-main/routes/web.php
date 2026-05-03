@@ -13,6 +13,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+Route::get('/ventas/registrar', [VentaController::class, 'registrar'])->name('ventas.registrar')->middleware('can:venta.create');
+
 Route::get( '/', [WelcomeController::class, 'welcome'])->name('welcome');
 
 Route::post('/ventas',[VentaController::class,'store'])->name('ventas.store');

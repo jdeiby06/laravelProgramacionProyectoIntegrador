@@ -35,6 +35,12 @@ Productos
             <a href="{{ route('producto.index') }}" class="nav-link btn-limpiar">Limpiar</a>
         </form>
 
+        @can('venta.create')
+<li class="nav-item" style="list-style:none;">
+    <a href="{{ route('ventas.registrar') }}" class="nav-link btn-venta">Registrar Venta</a>
+</li>
+@endcan
+
         <nav class="nav-acciones">
             @can('producto.create')
             <a href="{{ route('producto.create') }}" class="nav-link btn-agregar">Agregar Producto</a>

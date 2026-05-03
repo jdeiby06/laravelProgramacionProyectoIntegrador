@@ -36,6 +36,12 @@ Productos
             <a href="<?php echo e(route('producto.index')); ?>" class="nav-link btn-limpiar">Limpiar</a>
         </form>
 
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('venta.create')): ?>
+<li class="nav-item" style="list-style:none;">
+    <a href="<?php echo e(route('ventas.registrar')); ?>" class="nav-link btn-venta">Registrar Venta</a>
+</li>
+<?php endif; ?>
+
         <nav class="nav-acciones">
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('producto.create')): ?>
             <a href="<?php echo e(route('producto.create')); ?>" class="nav-link btn-agregar">Agregar Producto</a>
