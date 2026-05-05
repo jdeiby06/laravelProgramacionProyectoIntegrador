@@ -3,6 +3,19 @@
 Productos
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('contenido'); ?>
+<?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('error')): ?>
+    <div style="background:#fee2e2; color:#dc2626; padding:10px 16px; border-radius:8px; margin-bottom:1rem;">
+        ⚠️ <?php echo e(session('error')); ?>
+
+    </div>
+<?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+<?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('success')): ?>
+    <div style="background:#d1fae5; color:#059669; padding:10px 16px; border-radius:8px; margin-bottom:1rem;">
+        ✓ <?php echo e(session('success')); ?>
+
+    </div>
+<?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
 <section class="container-tabla">
     <h2 class="titulo-tabla">Listado de productos</h2>

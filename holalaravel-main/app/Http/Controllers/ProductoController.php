@@ -176,16 +176,18 @@ if ((int)$stockAnterior !== (int)$producto->stock) {
      * Remove the specified resource from storage.
      */
     public function destroy(Producto $producto)
-    {
-        //
-        try{
-            $producto->delete();
-            return redirect()->route("producto.index")->with('success', 'Producto eliminado correctamente');
-               }catch(QueryException $e){
-                if($e->getCode()==="23000"){
-                    return redirect()->back()->with('error', 'El producto no se puede eliminar por que esta asociado con otro registro');
-                }
-                return redirect()->back()->with('error inesperado');
-               }
-     }
+{
+    try {
+        // Metodo actualizado para eliminar los registros relacionados antes de eliminar el producto
+        \App\Models\DetalleVenta::where('producto_id', $producto->id)->delete();
+        \App\Models\HistorialStock::where('producto_id', $producto->id)->delete();
+        
+        $producto->delete();
+        
+        return redirect()->route("producto.index")->with('success', 'Producto eliminado correctamente');
+        
+    } catch (QueryException $e) {
+        return redirect()->back()->with('error', 'Error inesperado al eliminar');
+    }
+}
 }
