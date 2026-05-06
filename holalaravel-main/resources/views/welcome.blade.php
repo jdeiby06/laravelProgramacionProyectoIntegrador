@@ -39,7 +39,7 @@
                       <li>   <a href="{{ route('register') }}">Registro </a></li>
                       
                 @endauth
-                
+                <li>@livewire('icono-carrito')</li>
                 
                 
                 

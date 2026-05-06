@@ -3,6 +3,17 @@
 Productos
 @endsection
 @section('contenido')
+@if(session('error'))
+    <div style="background:#fee2e2; color:#dc2626; padding:10px 16px; border-radius:8px; margin-bottom:1rem;">
+        ⚠️ {{ session('error') }}
+    </div>
+@endif
+
+@if(session('success'))
+    <div style="background:#d1fae5; color:#059669; padding:10px 16px; border-radius:8px; margin-bottom:1rem;">
+        ✓ {{ session('success') }}
+    </div>
+@endif
 
 <section class="container-tabla">
     <h2 class="titulo-tabla">Listado de productos</h2>
@@ -34,6 +45,12 @@ Productos
             <button type="submit" class="nav-link btn-filtrar">Filtrar</button>
             <a href="{{ route('producto.index') }}" class="nav-link btn-limpiar">Limpiar</a>
         </form>
+
+        @can('venta.create')
+<li class="nav-item" style="list-style:none;">
+    <a href="{{ route('ventas.registrar') }}" class="nav-link btn-venta">Registrar Venta</a>
+</li>
+@endcan
 
         <nav class="nav-acciones">
             @can('producto.create')

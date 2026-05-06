@@ -3,6 +3,19 @@
 Productos
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('contenido'); ?>
+<?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('error')): ?>
+    <div style="background:#fee2e2; color:#dc2626; padding:10px 16px; border-radius:8px; margin-bottom:1rem;">
+        ⚠️ <?php echo e(session('error')); ?>
+
+    </div>
+<?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+<?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('success')): ?>
+    <div style="background:#d1fae5; color:#059669; padding:10px 16px; border-radius:8px; margin-bottom:1rem;">
+        ✓ <?php echo e(session('success')); ?>
+
+    </div>
+<?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
 <section class="container-tabla">
     <h2 class="titulo-tabla">Listado de productos</h2>
@@ -13,13 +26,13 @@ Productos
         <form method="GET" action="<?php echo e(route('producto.index')); ?>" class="form-filtros">
             <select name="categoria" class="filtro-select">
                 <option value="">Categoría</option>
-                <?php $__currentLoopData = $categorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $categorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                     <option value="<?php echo e($cat->id); ?>"
                         <?php echo e(request('categoria') == $cat->id ? 'selected' : ''); ?>>
                         <?php echo e($cat->nombre); ?>
 
                     </option>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
             </select>
 
             <select name="stock" class="filtro-select">
@@ -35,6 +48,12 @@ Productos
             <button type="submit" class="nav-link btn-filtrar">Filtrar</button>
             <a href="<?php echo e(route('producto.index')); ?>" class="nav-link btn-limpiar">Limpiar</a>
         </form>
+
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('venta.create')): ?>
+<li class="nav-item" style="list-style:none;">
+    <a href="<?php echo e(route('ventas.registrar')); ?>" class="nav-link btn-venta">Registrar Venta</a>
+</li>
+<?php endif; ?>
 
         <nav class="nav-acciones">
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('producto.create')): ?>
@@ -59,7 +78,7 @@ Productos
             </tr>
         </thead>
         <tbody class="tabla-productos">
-            <?php $__currentLoopData = $productos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $producto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $productos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $producto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
             <tr>
                 <td><?php echo e($producto->id); ?></td>
                 <td><?php echo e($producto->nombre); ?></td>
@@ -88,7 +107,7 @@ Productos
                     </form>
                 </td>
             </tr>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
         </tbody>
     </table>
 

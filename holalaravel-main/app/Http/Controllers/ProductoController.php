@@ -72,7 +72,7 @@ class ProductoController extends Controller
         }
     }
 
-    $productos = $query->paginate(2)->withQueryString();
+    $productos = $query->paginate(5)->withQueryString();
 
     return view('producto.index', compact('productos', 'categorias'));
 }
@@ -149,9 +149,25 @@ class ProductoController extends Controller
         $nombreImagen = $producto->imagen;
     }
 
+    // ← Guardar ANTES de actualizar
+    $stockAnterior = $producto->stock;
+
     $data = $request->except('imagen');
     $data['imagen'] = $nombreImagen;
     $producto->update($data);
+    
+
+    
+    // Registra el historial si el stock cambió
+if ((int)$stockAnterior !== (int)$producto->stock) {
+    \App\Models\HistorialStock::create([
+        'producto_id'       => $producto->id,
+        'usuario_id'        => auth()->id(),
+        'cantidad_anterior' => (int)$stockAnterior,
+        'cantidad_nueva'    => (int)$producto->stock,
+        'motivo'            => 'Actualización de producto desde panel de administración',
+    ]);
+}
 
     return redirect()->route('producto.index')->with('success', 'Producto actualizado correctamente');
 }
@@ -160,16 +176,18 @@ class ProductoController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Producto $producto)
-    {
-        //
-        try{
-            $producto->delete();
-            return redirect()->route("producto.index")->with('success', 'Producto eliminado correctamente');
-               }catch(QueryException $e){
-                if($e->getCode()==="23000"){
-                    return redirect()->back()->with('error', 'El producto no se puede eliminar por que esta asociado con otro registro');
-                }
-                return redirect()->back()->with('error inesperado');
-               }
-     }
+{
+    try {
+        // Metodo actualizado para eliminar los registros relacionados antes de eliminar el producto
+        \App\Models\DetalleVenta::where('producto_id', $producto->id)->delete();
+        \App\Models\HistorialStock::where('producto_id', $producto->id)->delete();
+        
+        $producto->delete();
+        
+        return redirect()->route("producto.index")->with('success', 'Producto eliminado correctamente');
+        
+    } catch (QueryException $e) {
+        return redirect()->back()->with('error', 'Error inesperado al eliminar');
+    }
+}
 }

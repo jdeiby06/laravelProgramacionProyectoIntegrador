@@ -8,124 +8,135 @@
 <?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+
+    <link rel="stylesheet" href="<?php echo e(asset('css/dashboard-ventas.css')); ?>">
      <?php $__env->slot('header', null, []); ?> 
-        <h2 style="color: rgba(129, 67, 191, 0.8); font-size: 20px; font-weight: 700;">
-            Dashboard
-        </h2>
+        <h2 style="font-family:'Outfit',sans-serif; font-weight:600; font-size:18px; color:#1a1830;">Dashboard</h2>
      <?php $__env->endSlot(); ?>
 
-    <div style="padding: 30px 20px;">
-        <div style="max-width: 1200px; margin: auto;">
+    <div class="dashboard-wrapper">
 
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px;">
-
-                
-                <div style="background: white; border-radius: 12px; padding: 20px;
-                    box-shadow: 0 4px 12px rgba(129, 67, 191, 0.1);
-                    border-left: 4px solid rgba(129, 67, 191, 0.8);">
-                    <p style="font-size: 13px; color: #999; margin-bottom: 6px;">Total Productos</p>
-                    <h3 style="font-size: 28px; font-weight: 700; color: rgba(129, 67, 191, 0.8);">
-                        <?php echo e(\App\Models\Producto::count()); ?>
-
-                    </h3>
-                    <a href="<?php echo e(route('producto.index')); ?>"
-                        style="font-size: 12px; color: rgba(129, 67, 191, 0.8); text-decoration: none; margin-top: 8px; display: inline-block;">
-                        Ver productos →
-                    </a>
-                </div>
-
-                
-                <div style="background: white; border-radius: 12px; padding: 20px;
-                    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.15);
-                    border-left: 4px solid #17a2b8;">
-                    <p style="font-size: 13px; color: #999; margin-bottom: 6px;">Total Categorías</p>
-                    <h3 style="font-size: 28px; font-weight: 700; color: #17a2b8;">
-                        <?php echo e(\App\Models\Categoria::count()); ?>
-
-                    </h3>
-                    <a href="<?php echo e(route('categoria.index')); ?>"
-                        style="font-size: 12px; color: #17a2b8; text-decoration: none; margin-top: 8px; display: inline-block;">
-                        Ver categorías →
-                    </a>
-                </div>
-
-                
-                <div style="background: white; border-radius: 12px; padding: 20px;
-                    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.1);
-                    border-left: 4px solid #dc3545;">
-                    <p style="font-size: 13px; color: #999; margin-bottom: 6px;">Sin Stock</p>
-                    <h3 style="font-size: 28px; font-weight: 700; color: #dc3545;">
-                        <?php echo e(\App\Models\Producto::where('stock', '<=', 0)->count()); ?>
-
-                    </h3>
-                    <a href="<?php echo e(route('producto.index', ['stock' => 'agotado'])); ?>"
-                        style="font-size: 12px; color: #dc3545; text-decoration: none; margin-top: 8px; display: inline-block;">
-                        Ver agotados →
-                    </a>
-                </div>
-
-                
-                <div style="background: white; border-radius: 12px; padding: 20px;
-                    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.1);
-                    border-left: 4px solid #28a745;">
-                    <p style="font-size: 13px; color: #999; margin-bottom: 6px;">Usuario</p>
-                    <h3 style="font-size: 16px; font-weight: 700; color: #28a745; margin-top: 6px;">
-                        <?php echo e(auth()->user()->name); ?>
-
-                    </h3>
-                    <p style="font-size: 12px; color: #999; margin-top: 4px;">
-                        <?php echo e(auth()->user()->email); ?>
-
-                    </p>
-                </div>
-
+        
+        <div class="stats-grid">
+            <div class="stat-card purple">
+                <p class="stat-label">Total Productos</p>
+                <p class="stat-value"><?php echo e($totalProductos); ?></p>
+                <a href="<?php echo e(route('producto.index')); ?>" class="stat-link">Ver productos →</a>
             </div>
-
-            
-            <div style="background: white; border-radius: 12px; padding: 20px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
-                <h3 style="font-size: 16px; font-weight: 700; color: rgba(129, 67, 191, 0.8);
-                    margin-bottom: 15px; padding-bottom: 10px;
-                    border-bottom: 2px solid rgba(129, 67, 191, 0.15);">
-                    ⚠️ Productos con stock bajo (menos de 5)
-                </h3>
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-                    <thead>
-                        <tr style="background: rgba(129, 67, 191, 0.08);">
-                            <th style="padding: 10px; text-align: left; color: rgba(129, 67, 191, 0.8);">Nombre</th>
-                            <th style="padding: 10px; text-align: left; color: rgba(129, 67, 191, 0.8);">Categoría</th>
-                            <th style="padding: 10px; text-align: left; color: rgba(129, 67, 191, 0.8);">Stock</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $__empty_1 = true; $__currentLoopData = \App\Models\Producto::with('categoria')->where('stock', '<', 5)->orderBy('stock')->take(8)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $producto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                        <tr style="border-bottom: 1px solid #f0f0f0;">
-                            <td style="padding: 10px;"><?php echo e($producto->nombre); ?></td>
-                            <td style="padding: 10px; color: #999;">
-                                <?php echo e($producto->categoria ? $producto->categoria->nombre : 'Sin categoría'); ?>
-
-                            </td>
-                            <td style="padding: 10px;">
-                                <span style="background: <?php echo e($producto->stock <= 0 ? '#dc3545' : '#ffc107'); ?>;
-                                    color: white; padding: 3px 10px; border-radius: 20px; font-size: 12px;">
-                                    <?php echo e($producto->stock <= 0 ? 'Agotado' : $producto->stock); ?>
-
-                                </span>
-                            </td>
-                        </tr>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                        <tr>
-                            <td colspan="3" style="padding: 20px; text-align: center; color: #28a745;">
-                                ✅ Todos los productos tienen stock suficiente
-                            </td>
-                        </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+            <div class="stat-card teal">
+                <p class="stat-label">Total Categorías</p>
+                <p class="stat-value"><?php echo e($totalCategorias); ?></p>
+                <a href="<?php echo e(route('categoria.index')); ?>" class="stat-link">Ver categorías →</a>
             </div>
-
+            <div class="stat-card red">
+                <p class="stat-label">Sin Stock</p>
+                <p class="stat-value"><?php echo e($sinStock); ?></p>
+                <a href="<?php echo e(route('producto.index', ['stock' => 'agotado'])); ?>" class="stat-link">Ver agotados →</a>
+            </div>
+            <div class="stat-card green">
+                <p class="stat-label">Usuario</p>
+                <p class="stat-value" style="font-size:1.3rem;"><?php echo e(auth()->user()->name); ?></p>
+                <span class="stat-link" style="cursor:default; opacity:.6;"><?php echo e(auth()->user()->email); ?></span>
+            </div>
         </div>
+
+        
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($stockBajo->count()): ?>
+        <div class="panel">
+            <div class="panel-header">
+                <h3 class="panel-title">⚠️ Productos con stock bajo <span style="font-weight:400; color:#9896b0;">(menos de 5)</span></h3>
+            </div>
+            <table class="inv-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $stockBajo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                    <tr>
+                        <td data-label="Nombre"><?php echo e($p->nombre); ?></td>
+                        <td data-label="Categoría"><?php echo e($p->categoria->nombre ?? 'Sin categoría'); ?></td>
+                        <td data-label="Stock">
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($p->stock == 0): ?>
+                                <span class="badge badge-red">Agotado</span>
+                            <?php else: ?>
+                                <span class="badge badge-yellow"><?php echo e($p->stock); ?></span>
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+        
+        <div class="panel">
+            <div class="panel-header">
+                <h3 class="panel-title">📦 Historial de movimientos de stock</h3>
+            </div>
+            <table class="inv-table">
+                <thead>
+                    <tr>
+                        <th>
+                            Fecha y hora
+                            <span class="sort-arrows">
+                                <a href="<?php echo e(request()->fullUrlWithQuery(['orden' => 'asc', 'page' => 1])); ?>"
+                                   title="Más antiguo primero"
+                                   class="<?php echo e($orden === 'asc' ? 'active' : ''); ?>">▲</a>
+                                <a href="<?php echo e(request()->fullUrlWithQuery(['orden' => 'desc', 'page' => 1])); ?>"
+                                   title="Más reciente primero"
+                                   class="<?php echo e($orden === 'desc' ? 'active' : ''); ?>">▼</a>
+                            </span>
+                        </th>
+                        <th>Producto</th>
+                        <th>Stock anterior</th>
+                        <th>Stock nuevo</th>
+                        <th>Usuario</th>
+                        <th>Motivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $movimientos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mov): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                    <tr>
+                        <td data-label="Fecha"><?php echo e($mov->created_at->format('d/m/Y H:i')); ?></td>
+                        <td data-label="Producto"><?php echo e($mov->producto->nombre ?? 'N/A'); ?></td>
+                        <td data-label="Stock anterior"><?php echo e($mov->cantidad_anterior); ?></td>
+                        <td data-label="Stock nuevo">
+                            <span class="<?php echo e($mov->cantidad_nueva > $mov->cantidad_anterior ? 'stock-up' : 'stock-down'); ?>">
+                                <?php echo e($mov->cantidad_nueva); ?>
+
+                                <?php echo e($mov->cantidad_nueva > $mov->cantidad_anterior ? '▲' : '▼'); ?>
+
+                            </span>
+                        </td>
+                        <td data-label="Usuario"><?php echo e($mov->usuario->name ?? 'N/A'); ?></td>
+                        <td data-label="Motivo">
+                            <span class="badge <?php echo e($mov->motivo === 'venta registrada' ? 'badge-red' : 'badge-purple'); ?>">
+                                <?php echo e($mov->motivo); ?>
+
+                            </span>
+                        </td>
+                    </tr>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding:2rem; color:#9896b0;">
+                            Sin movimientos registrados
+                        </td>
+                    </tr>
+                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+                <?php echo e($movimientos->links()); ?>
+
+            </div>
+        </div>
+
     </div>
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>

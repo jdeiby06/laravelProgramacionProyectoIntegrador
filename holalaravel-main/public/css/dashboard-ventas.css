@@ -1,0 +1,508 @@
+/* =============================================
+   InventorySoft — Dashboard & Registrar Venta
+   Fuente: Google Fonts (Outfit + DM Sans)
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+/* === VARIABLES === */
+:root {
+    --purple-50:  #f5f3ff;
+    --purple-100: #ede9fe;
+    --purple-400: #a78bfa;
+    --purple-500: #8b5cf6;
+    --purple-600: #7c3aed;
+    --purple-700: #6d28d9;
+    --purple-900: #2e1065;
+
+    --gray-50:  #f8f7fc;
+    --gray-100: #f1f0f7;
+    --gray-200: #e5e3f0;
+    --gray-400: #9896b0;
+    --gray-600: #5a5875;
+    --gray-800: #2d2b45;
+    --gray-900: #1a1830;
+
+    --green-100: #d1fae5;
+    --green-600: #059669;
+    --red-100:   #fee2e2;
+    --red-600:   #dc2626;
+    --yellow-100:#fef3c7;
+    --yellow-600:#d97706;
+
+    --shadow-sm: 0 1px 3px rgba(109,40,217,.08), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 16px rgba(109,40,217,.10), 0 2px 6px rgba(0,0,0,.06);
+    --shadow-lg: 0 8px 32px rgba(109,40,217,.14), 0 4px 12px rgba(0,0,0,.08);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+}
+
+/* === BASE === */
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-800);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+/* === DASHBOARD LAYOUT === */
+.dashboard-wrapper {
+    padding: 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* === TARJETAS RESUMEN === */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    border-radius: 4px 0 0 4px;
+}
+
+.stat-card.purple::before  { background: var(--purple-500); }
+.stat-card.teal::before    { background: #0d9488; }
+.stat-card.red::before     { background: var(--red-600); }
+.stat-card.green::before   { background: var(--green-600); }
+
+.stat-card .stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--gray-400);
+    margin-bottom: .4rem;
+}
+
+.stat-card .stat-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: .5rem;
+}
+
+.stat-card.purple .stat-value  { color: var(--purple-600); }
+.stat-card.teal .stat-value    { color: #0d9488; }
+.stat-card.red .stat-value     { color: var(--red-600); }
+.stat-card.green .stat-value   { color: var(--green-600); }
+
+.stat-card .stat-link {
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    opacity: .75;
+    transition: opacity .15s;
+}
+.stat-card .stat-link:hover { opacity: 1; }
+.stat-card.purple .stat-link  { color: var(--purple-500); }
+.stat-card.teal .stat-link    { color: #0d9488; }
+.stat-card.red .stat-link     { color: var(--red-600); }
+.stat-card.green .stat-link   { color: var(--green-600); }
+
+/* === PANEL (tabla stock bajo y movimientos) === */
+.panel {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.panel-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gray-900);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0;
+}
+
+/* === TABLA === */
+.inv-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.inv-table thead tr {
+    background: var(--purple-50);
+}
+
+.inv-table thead th {
+    padding: .75rem 1.25rem;
+    text-align: left;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--purple-600);
+    white-space: nowrap;
+}
+
+.inv-table tbody tr {
+    border-bottom: 1px solid var(--gray-100);
+    transition: background .15s;
+}
+
+.inv-table tbody tr:last-child { border-bottom: none; }
+.inv-table tbody tr:hover { background: var(--gray-50); }
+
+.inv-table td {
+    padding: .875rem 1.25rem;
+    color: var(--gray-600);
+}
+
+.inv-table td:first-child {
+    font-weight: 500;
+    color: var(--gray-800);
+}
+
+/* === BADGES === */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 99px;
+}
+
+.badge-red    { background: var(--red-100);    color: var(--red-600); }
+.badge-yellow { background: var(--yellow-100); color: var(--yellow-600); }
+.badge-green  { background: var(--green-100);  color: var(--green-600); }
+.badge-purple { background: var(--purple-100); color: var(--purple-600); }
+
+/* Stock subió/bajó */
+.stock-up   { color: var(--green-600); font-weight: 600; }
+.stock-down { color: var(--red-600);   font-weight: 600; }
+
+/* === ORDEN FLECHAS === */
+.sort-arrows {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.sort-arrows a {
+    font-size: 10px;
+    line-height: 1;
+    color: var(--gray-400);
+    text-decoration: none;
+    transition: color .15s;
+}
+
+.sort-arrows a:hover,
+.sort-arrows a.active {
+    color: var(--purple-600);
+    font-weight: 700;
+}
+
+/* === PAGINACIÓN === */
+.pagination-wrapper {
+    padding: .875rem 1.25rem;
+    border-top: 1px solid var(--gray-100);
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Override Tailwind pagination de Laravel */
+nav[aria-label="Pagination"] span,
+nav[aria-label="Pagination"] a {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    padding: 5px 11px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--gray-200);
+    margin: 0 2px;
+    color: var(--gray-600);
+    text-decoration: none;
+    transition: all .15s;
+}
+
+nav[aria-label="Pagination"] a:hover {
+    background: var(--purple-50);
+    border-color: var(--purple-400);
+    color: var(--purple-600);
+}
+
+nav[aria-label="Pagination"] span[aria-current] {
+    background: var(--purple-600);
+    border-color: var(--purple-600);
+    color: white;
+}
+
+/* =============================================
+   REGISTRAR VENTA
+   ============================================= */
+
+.venta-wrapper {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.venta-panel {
+    background: white;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.venta-panel-header {
+    background: linear-gradient(135deg, var(--purple-600), var(--purple-700));
+    padding: 1.5rem 2rem;
+}
+
+.venta-panel-header h2 {
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.venta-panel-header p {
+    color: rgba(255,255,255,.7);
+    font-size: 13px;
+    margin: 4px 0 0;
+}
+
+.venta-panel-body {
+    padding: 2rem;
+}
+
+/* Tabla de productos para venta */
+.venta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.venta-table thead tr {
+    background: var(--purple-50);
+    border-radius: var(--radius-md);
+}
+
+.venta-table thead th {
+    padding: .75rem 1rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--purple-600);
+    text-align: left;
+}
+
+.venta-table tbody tr {
+    border-bottom: 1px solid var(--gray-100);
+    transition: background .15s;
+}
+
+.venta-table tbody tr:hover { background: var(--purple-50); }
+
+.venta-table td {
+    padding: .875rem 1rem;
+    color: var(--gray-700);
+    font-size: 13px;
+}
+
+.venta-table td.product-name {
+    font-weight: 500;
+    color: var(--gray-900);
+}
+
+.venta-table td.stock-cell {
+    font-variant-numeric: tabular-nums;
+}
+
+.venta-table td.stock-cell.low { color: var(--red-600); font-weight: 600; }
+
+/* Input cantidad */
+.qty-input {
+    width: 72px;
+    text-align: center;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    padding: 6px 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-800);
+    transition: border-color .15s, box-shadow .15s;
+    outline: none;
+}
+
+.qty-input:focus {
+    border-color: var(--purple-400);
+    box-shadow: 0 0 0 3px rgba(139,92,246,.12);
+}
+
+.qty-input::-webkit-inner-spin-button { opacity: .5; }
+
+/* Resumen */
+.venta-resumen {
+    background: var(--gray-50);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.venta-resumen h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--gray-400);
+    margin: 0 0 .75rem;
+}
+
+.resumen-items {
+    font-size: 13px;
+    color: var(--gray-600);
+    min-height: 24px;
+}
+
+.resumen-items .resumen-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px dashed var(--gray-200);
+}
+
+.resumen-items .resumen-row:last-child { border-bottom: none; }
+
+.venta-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: .875rem;
+    padding-top: .875rem;
+    border-top: 2px solid var(--gray-200);
+}
+
+.venta-total span:first-child {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--gray-400);
+}
+
+.venta-total .total-amount {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--purple-600);
+}
+
+/* Botón registrar venta */
+.btn-registrar {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: var(--purple-600);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: .75rem 1.75rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 4px 12px rgba(124,58,237,.3);
+}
+
+.btn-registrar:hover {
+    background: var(--purple-700);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(124,58,237,.35);
+}
+
+.btn-registrar:active {
+    transform: translateY(0);
+}
+
+/* Alertas */
+.alert {
+    border-radius: var(--radius-md);
+    padding: .875rem 1.25rem;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.alert-success { background: var(--green-100); color: var(--green-600); }
+.alert-error   { background: var(--red-100);   color: var(--red-600); }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .dashboard-wrapper, .venta-wrapper { padding: 1rem; }
+    .inv-table thead { display: none; }
+    .inv-table td { display: block; padding: .4rem 1rem; }
+    .inv-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--gray-400);
+        font-size: 11px;
+        text-transform: uppercase;
+        display: block;
+    }
+}

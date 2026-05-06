@@ -27,8 +27,10 @@ use SebastianBergmann\Template\Template;
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
  */
+
 final class Dashboard extends Renderer
 {
+    
     public function render(DirectoryNode $node, string $file): void
     {
         $classes      = $node->classesAndTraits();
@@ -295,4 +297,5 @@ final class Dashboard extends Renderer
 
         return $result;
     }
+    
 }
