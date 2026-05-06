@@ -1,0 +1,326 @@
+/* =============================================
+   InventorySoft — Sidebar & Layout
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+:root {
+    --purple-50:  #f5f3ff;
+    --purple-100: #ede9fe;
+    --purple-400: #a78bfa;
+    --purple-500: #8b5cf6;
+    --purple-600: #7c3aed;
+    --purple-700: #6d28d9;
+    --purple-900: #2e1065;
+
+    --gray-50:  #f8f7fc;
+    --gray-100: #f1f0f7;
+    --gray-200: #e5e3f0;
+    --gray-400: #9896b0;
+    --gray-600: #5a5875;
+    --gray-800: #2d2b45;
+    --gray-900: #1a1830;
+
+    --sidebar-width: 240px;
+    --header-height: 60px;
+
+    --shadow-sm: 0 1px 3px rgba(109,40,217,.08);
+    --shadow-md: 0 4px 16px rgba(109,40,217,.10);
+    --shadow-lg: 0 8px 32px rgba(109,40,217,.18);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+}
+
+/* === RESET BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-800);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* === SIDEBAR === */
+.slidebar {
+    width: var(--sidebar-width);
+    min-height: 100vh;
+    background: white;
+    border-right: 1px solid var(--gray-100);
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 1.5rem;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+    transition: transform .3s ease;
+}
+
+.slidebar.hidden {
+    transform: translateX(-100%);
+}
+
+/* === LOGO === */
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem 1.25rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gray-100);
+    margin-bottom: .5rem;
+    background: linear-gradient(160deg, var(--purple-50), white);
+}
+
+.logo-img {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(124,58,237,.2);
+    border: 2px solid var(--purple-100);
+    margin-bottom: .625rem;
+}
+
+.logo-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gray-900);
+    letter-spacing: -.01em;
+}
+
+/* === ELEMENTOS SIDEBAR === */
+.element-slidebar {
+    padding: 0 .75rem;
+    margin-bottom: .25rem;
+    position: relative;
+}
+
+.element-slidebar-btn {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .65rem .875rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 14px;
+    font-weight: 500;
+    
+}
+
+.element-slidebar-btn:hover {
+    background: var(--purple-50);
+    color: var(--purple-600);
+}
+
+.element-slidebar-btn.active,
+.element-slidebar > .element-slidebar-btn.active {
+    background: var(--purple-600);
+    color: white;
+}
+
+.element-slidebar-btn.active img {
+    filter: brightness(0) invert(1);
+}
+
+/* Iconos del sidebar */
+.element-slidebar-btn span {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background: var(--gray-100);
+    flex-shrink: 0;
+    transition: background .15s;
+}
+
+.element-slidebar-btn:hover span {
+    background: var(--purple-100);
+}
+
+.element-slidebar-btn.active span {
+    background: rgba(255,255,255,.2);
+}
+
+.element-slidebar-btn span img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.element-slidebar-btn a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1;
+}
+
+/* === PERFIL === */
+.element-slidebar-btn.profile {
+    margin: .5rem .75rem .25rem;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: .625rem .875rem;
+}
+
+.element-slidebar-btn.profile span {
+    background: white;
+    border: 2px solid var(--purple-200, #ddd6fe);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.element-slidebar-btn.profile span img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.element-slidebar-btn.profile p {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-800);
+    flex: 1;
+}
+
+/* Dropdown del perfil */
+.element-slidebar-content {
+    display: none;
+    flex-direction: column;
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    margin: .25rem .75rem 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.element-slidebar.active .element-slidebar-content {
+    display: flex;
+}
+
+.element-slidebar-content a,
+.element-slidebar-content .logout-link {
+    display: block;
+    padding: .625rem 1rem;
+    font-size: 13px;
+    color: var(--gray-600);
+    text-decoration: none;
+    transition: background .15s, color .15s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.element-slidebar-content a:hover,
+.element-slidebar-content .logout-link:hover {
+    background: var(--purple-50);
+    color: var(--purple-600);
+}
+
+.element-slidebar-content .logout-link {
+    color: #dc2626;
+}
+
+.element-slidebar-content .logout-link:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Separador de sección */
+.sidebar-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--gray-400);
+    padding: .875rem 1.625rem .375rem;
+}
+
+/* === MAIN === */
+.main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: margin-left .3s ease;
+}
+
+/* === HEADER === */
+.header {
+    height: var(--header-height);
+    background: white;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.75rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: var(--shadow-sm);
+}
+
+.titulo-nav {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+/* Botón hamburguesa */
+.menu-hamburger {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--gray-600);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    transition: background .15s, color .15s;
+    display: none;
+}
+
+.menu-hamburger:hover {
+    background: var(--purple-50);
+    color: var(--purple-600);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .slidebar {
+        transform: translateX(-100%);
+    }
+
+    .slidebar:not(.hidden) {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .menu-hamburger {
+        display: block;
+    }
+}
