@@ -10,6 +10,6 @@
 - Ingresar a la url proporcionada por el comando php artisan serve.
 - Clic a Login en la parte superior derecha.
 - Ingresar el correo y contraseña del usuario a seleccionar.
-### Admin: admin@gmail.com
-### User: user@gmail.com
-### Password: 12345678
+#### Admin: admin@gmail.com
+#### User: user@gmail.com
+#### Password: 12345678
