@@ -23,7 +23,7 @@
 
         
         <a href="<?php echo e(route('dashboard')); ?>" class="logo">
-            <img src="<?php echo e(asset('img/InventoryLogo.jpg')); ?>" alt="Logo" class="logo-img">
+            <img src="<?php echo e(asset('img/InventoryLogo.jpg')); ?>" alt="Logo"  class="logo-img">
             <p class="logo-text">InventorySoft</p>
         </a>
 
@@ -49,7 +49,7 @@
 
         <div class="element-slidebar">
             <a href="<?php echo e(route('dashboard')); ?>" class="element-slidebar-btn">
-                <span><img src="<?php echo e(asset('img/compras.png')); ?>" alt="Dashboard"></span>
+                <span><img src="<?php echo e(asset('img/dashboard.png')); ?>" alt="Dashboard"></span>
                 Dashboard
             </a>
         </div>
@@ -63,7 +63,7 @@
 
         <div class="element-slidebar">
             <a href="<?php echo e(route('producto.index')); ?>" class="element-slidebar-btn">
-                <span><img src="<?php echo e(asset('img/rokrt.png')); ?>" alt="Productos"></span>
+                <span><img src="<?php echo e(asset('img/productos.png')); ?>" alt="Productos"></span>
                 Productos
             </a>
         </div>

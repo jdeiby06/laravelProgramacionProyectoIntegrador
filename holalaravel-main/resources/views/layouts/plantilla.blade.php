@@ -23,7 +23,7 @@
 
         {{-- Logo --}}
         <a href="{{ route('dashboard') }}" class="logo">
-            <img src="{{ asset('img/InventoryLogo.jpg') }}" alt="Logo" class="logo-img">
+            <img src="{{ asset('img/InventoryLogo.jpg') }}" alt="Logo"  class="logo-img">
             <p class="logo-text">InventorySoft</p>
         </a>
 
@@ -49,7 +49,7 @@
 
         <div class="element-slidebar">
             <a href="{{ route('dashboard') }}" class="element-slidebar-btn">
-                <span><img src="{{ asset('img/compras.png') }}" alt="Dashboard"></span>
+                <span><img src="{{ asset('img/dashboard.png') }}" alt="Dashboard"></span>
                 Dashboard
             </a>
         </div>
@@ -63,7 +63,7 @@
 
         <div class="element-slidebar">
             <a href="{{ route('producto.index') }}" class="element-slidebar-btn">
-                <span><img src="{{ asset('img/rokrt.png') }}" alt="Productos"></span>
+                <span><img src="{{ asset('img/productos.png') }}" alt="Productos"></span>
                 Productos
             </a>
         </div>

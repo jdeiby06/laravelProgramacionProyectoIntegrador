@@ -20,25 +20,40 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: "Roboto", sans-serif;
-            background-color: var(--color-main);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: var(--color-texto);
-        }
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: var(--color-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--color-texto);
+    background-image: url('<?php echo e(asset("img/InventoryLogo.jpg")); ?>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover; /* ← cubre toda la pantalla */
+    position: relative;
+}
 
-        .login-card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(129, 67, 191, 0.15);
-            padding: 40px;
-            width: 100%;
-            max-width: 420px;
-            border-top: 4px solid var(--color-texto-hover);
-        }
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-color: rgba(244, 247, 250, 0.55); /* ← transparencia sobre el logo */
+    z-index: 0;
+}
+
+.login-card {
+    position: relative;
+    z-index: 1; /* ← encima de la capa */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(129, 67, 191, 0.15);
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    border-top: 4px solid var(--color-texto-hover);
+}
 
         .login-logo {
             text-align: center;
@@ -165,8 +180,7 @@
 
         
         <div class="login-logo">
-            <img src="<?php echo e(asset('img/InventoryLogo.png')); ?>" alt="Logo"
-                onerror="this.style.display='none'">
+            
             <h1>Bienvenido</h1>
             <p>Inicia sesión para continuar</p>
         </div>
